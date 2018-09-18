@@ -1,0 +1,1 @@
+Get-ADGroup -Filter { Name -like "UNV_SAPM_*" }  | Get-ADGroupMember  -Recursive | Get-ADUser -Properties * | select Mail, @{Name="ManagerEmail";Expression={(get-aduser -property emailaddress $_.manager).emailaddress}} | Out-File -filepath .\email_list.txt

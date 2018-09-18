@@ -1,0 +1,67 @@
+## Set up a PowerShell profile:
+
+# test whether a profile already exists
+Test-Path $profile
+
+# Create a new profile
+New-Item -path $profile -type file –force
+# OR
+new-item -path "%UserProfile%\My Documents\WindowsPowerShell\profile.ps1" -itemtype file -force
+# OR
+new-item -path $env:"UserProfile\Documents\WindowsPowerShell\profile.ps1" -itemtype file -force
+# OR
+new-item $PROFILE.CurrentUserAllHosts -ItemType file -Force
+
+# then use ise to edit the new profile
+"C:\Program Files\Windows NT\Accessories\wordpad.exe" $PROFILE.CurrentUserAllHosts
+
+# open the profile with notepad for editing and customization 
+notepad $profile
+
+# next, we can set our default working directory
+set-location c:\users\%username%\desktop\working
+
+# we can then customize the title of the PowerShell
+$Shell.WindowTitle=”Poppin Shells”
+
+# we can change customization settings of our PS Window
+    $Shell = $Host.UI.RawUI
+    $size = $Shell.WindowSize
+    $size.width=70
+    $size.height=25
+    $Shell.WindowSize = $size
+    $size = $Shell.BufferSize
+    $size.width=70
+    $size.height=5000
+    $Shell.BufferSize = $size
+
+# we can change background and text coloring
+    $shell.BackgroundColor = “Gray”
+    $shell.ForegroundColor = “Black”
+
+# we can create aliases to be called within your PS scripts
+new-item alias:np -value C:\Windows\System32\notepad.exe
+new-item alias:tc -value Test-Connection
+
+
+
+# finally, cleanup the screen
+Clear-Host
+
+
+
+
+
+
+
+Get-Credential #Get D account credentials, or A account credentials, depending on the use case
+New-Alias of Out-File #Creates an alias so that I can use of instead of Out-File for simplification
+
+
+$profile  #See what profile is loaded, if any
+
+Create PS profile, then save and digitally sign it and set execution policy - AllSigned execution policy
+
+Get-PSSnapin –registered  #This will list all the registered, yet unloaded, snap-ins available.
+
+Add-PS­Snapin   #This allows you to add the snap-ins that you want to add to your PS profile

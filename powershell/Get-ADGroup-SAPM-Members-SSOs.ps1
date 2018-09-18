@@ -1,0 +1,1 @@
+Get-ADGroup -Filter { Name -like "UNV_SAPM_*" }  | Get-ADGroupMember  -Recursive | Get-ADUser -Properties Name | Select-Object Name | Out-File -filepath .\user_list.txt
